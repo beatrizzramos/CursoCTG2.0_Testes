@@ -21,10 +21,10 @@ public class TesteCliente {
         given()
                 .contentType(ContentType.JSON)
 
-                .when()
+        .when()
                 .get(enderecoApiCliente)
 
-                .then()
+        .then()
                 .statusCode(200)
                 .assertThat().body(new IsEqual<>(respostaEsperada));
 
@@ -46,39 +46,39 @@ public class TesteCliente {
         given()
                 .contentType(ContentType.JSON)
                 .body(clienteParaCadastrar)
-                .when()
+        .when()
                 .post(enderecoApiCliente + endpointCliente)
-                .then()
+        .then()
                 .statusCode(201)
                 .assertThat().body(containsString(respostaEsperada));
     }
 
-        @Test
-        @DisplayName("Quando atualizar cliente já cadastrado, então ele deve serr atualizado")
-        public void AtualizarClienteCadastrado() {
+    @Test
+    @DisplayName("Quando atualizar cliente já cadastrado, então ele deve serr atualizado")
+    public void AtualizarClienteCadastrado() {
 
-            String clienteParaCadastrar = "{\n" +
+        String clienteParaCadastrar = "{\n" +
                     "\"id\": 104,\n" +
                     "  \"idade\": 22,\n" +
                     "  \"nome\": \"MANU\",\n" +
                     "  \"risco\": 0\n" +
                     "}";
 
-            String clienteParaAtualizar = "{\n" +
+        String clienteParaAtualizar = "{\n" +
                     "\"id\": 104,\n" +
                     "  \"idade\": 10,\n" +
                     "  \"nome\": \"MANU\",\n" +
                     "  \"risco\": 0\n" +
                     "}";
 
-    String AtualizacaoEsperada = "{\"104\":{\"nome\":\"MANU\",\"idade\":10,\"id\":104,\"risco\":0}}";
+        String AtualizacaoEsperada = "{\"104\":{\"nome\":\"MANU\",\"idade\":10,\"id\":104,\"risco\":0}}";
 
             given()
                     .contentType(ContentType.JSON)
                     .body(clienteParaCadastrar)
-                    .when()
+            .when()
                     .post(enderecoApiCliente + endpointCliente)
-                    .then()
+            .then()
                     .statusCode(201);
 
             //ATUALIZAR
@@ -94,7 +94,7 @@ public class TesteCliente {
                 .assertThat().body(containsString(AtualizacaoEsperada));
 }
 
-@Test
+    @Test
     @DisplayName("Quando deletar cliente cadastrado, então ele deve ser deletado")
     public void DeletarClienteCadastradoporID() {
 
@@ -111,9 +111,9 @@ public class TesteCliente {
     given()
             .contentType(ContentType.JSON)
             .body(clienteParaCadastrar)
-            .when()
+    .when()
             .post(enderecoApiCliente + endpointCliente)
-            .then()
+    .then()
             .statusCode(201);
 
     //DELETAR
@@ -129,7 +129,5 @@ public class TesteCliente {
             .statusCode(200)
             .assertThat().body(new IsEqual<>(respostaEsperada));
 }
-
-
         }
 
